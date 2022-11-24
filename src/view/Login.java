@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
-import javax.swing.*;
 
+package view;
+import controller.UserController;
+import javax.swing.*;
+import java.sql.*;
 import database.DbConnection;
+import models.User;
 
 /**
  *
@@ -74,6 +77,11 @@ public class Login extends javax.swing.JFrame {
         tfusername.setFont(new java.awt.Font("Leelawadee UI", 0, 17)); // NOI18N
         tfusername.setText("Username or email");
         tfusername.setBorder(null);
+        tfusername.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfusernameMouseClicked(evt);
+            }
+        });
         tfusername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfusernameActionPerformed(evt);
@@ -85,6 +93,11 @@ public class Login extends javax.swing.JFrame {
         tfpass.setBackground(new java.awt.Color(152, 200, 231));
         tfpass.setText("jPasswordField1");
         tfpass.setBorder(null);
+        tfpass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfpassMouseClicked(evt);
+            }
+        });
         tfpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfpassActionPerformed(evt);
@@ -176,38 +189,60 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfusernameActionPerformed
+
+        tfusername.setText("");
+
         // TODO add your handling code here:
     }//GEN-LAST:event_tfusernameActionPerformed
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
 
-        String password=new String(tfpass.getPassword());
-        String username=tfusername.getText();
-        DbConnection db=new DbConnection();
+        DbConnection db= new DbConnection();
+        ResultSet rs ;
+        String email = tfusername.getText();
+        String pass = new String(tfpass.getPassword());
 
         if(evt.getSource()==btnlogin)
             {
-             
-                System.out.println("Username,Pwd:"+username+","+password);
+              if(email.equals("") || pass.equals("") ){
+            JOptionPane.showMessageDialog(null, "Please fill all the details");
+        }else{
+//            try {
+//                
+//                Connection conn=db.connectdb();
+//                String query = "Select * from user where user_email='"+email+"' and user_pass='"+pass+"' ";
+//                
+//                Statement smt = conn.createStatement();
+//                rs = smt.executeQuery(query);
+//                
+//            if(rs.next()){
+//
+//                JOptionPane.showMessageDialog(null, "You have logged in successfully","Success",
+//                            JOptionPane.INFORMATION_MESSAGE);
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Wrong password. Try again","Failed!!",
+//                            JOptionPane.ERROR_MESSAGE);
+//                
+//            }
+//                
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null, e);
+//                System.out.println(e);
+//                
+//                
+//            }
+            User s1 = new User(email,pass);
+            UserController sc= new UserController();
+            int isLogin = sc.testUser(s1);
+            if(isLogin!=0){
+                System.out.println("Inserted");
+                JOptionPane.showMessageDialog(null,"Inserted Successfully");
 
-                //The entered username and password are sent via "checkLogin()" which return boolean
-                if(!db.checkLogin(username, password))
-                    
-                {
-                    //a pop-up box
-                    JOptionPane.showMessageDialog(null, "Wrong password. Try again","Failed!!",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-                else
-                {
-                    //a pop-up box
-                    JOptionPane.showMessageDialog(null, "You have logged in successfully","Success",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
-            
-        
-            
-        
+            }else{
+                System.out.println(" NOt Inserted");
+                           // JOptionPane.showMessageDialog(null,"Not Inserted ");
+            }     
+              }       
         }
         
         
@@ -223,8 +258,20 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnforgotpassActionPerformed
 
     private void tfpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfpassActionPerformed
+
+
         // TODO add your handling code here:
     }//GEN-LAST:event_tfpassActionPerformed
+
+    private void tfusernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfusernameMouseClicked
+        tfusername.setText("");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfusernameMouseClicked
+
+    private void tfpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfpassMouseClicked
+        // TODO add your handling code here:
+        tfpass.setText("");
+    }//GEN-LAST:event_tfpassMouseClicked
 
     /**
      * @param args the command line arguments
