@@ -1,99 +1,51 @@
 package database;
 
-import javax.swing.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-import java.sql.*;
+//package student.information.system;
 
-public class DbConnection {
+public class DbConnection{
 
-    public Connection connection;
-
-    Statement statement;
-
-    ResultSet resultSet;
-
-    int value;
-
+// public Connection conn;
+//static reference to itself
+    private static DbConnection instance = new DbConnection();    
+    public static final String URL = "jdbc:mysql://localhost:3306/studentdb";
+    public static final String USER = "root";
+    public static final String PASSWORD = "Slesh@#";
+    public static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver"; 
+     
+    //private constructor
     public DbConnection() {
-
         try {
-
-            final String username = "root";
-
-            final String password = "Slesh@#";
-
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            connection = DriverManager.getConnection(
-
-                    "jdbc:mysql://localhost:3306/SoftwaricaDB", username, password);
-
-            if (connection != null) {
-
-                System.out.println("Connected to database --> SoftwaricaDB");
-
-            } else {
-
-                System.out.println("Error connecting to database");
-
-            }
-
-            statement = connection.createStatement();
-
-        } catch (Exception e) {
-
+            Class.forName(DRIVER_CLASS);
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-
         }
-
     }
-
-    // Via the use of sql query
-
-    // insert, update and delete
-
-    public int manipulate(String query) {
-
-        try {
-
-            value = statement.executeUpdate(query);
-
-            connection.close();
-
-        } catch (SQLIntegrityConstraintViolationException ex) {
-
-            JOptionPane.showMessageDialog(null, "These details already exist!");
-
+     
+    private Connection createConnection() {
+        Connection connection = null;
+        try {                  
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Connected to Database.");
+//            JOptionPane.showMessageDialog(null, "Connected to database");
         } catch (SQLException e) {
-
-            e.printStackTrace();
-
+            System.out.println("ERROR: Unable to Connect to Database."+e);
         }
-
-        return value;
-
+        return connection;
+    }   
+     
+    public static Connection getConnection() {
+        return instance.createConnection();
     }
-
-    public ResultSet retrieve(String query) {
-
-        try {
-
-            resultSet = statement.executeQuery(query);
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-
-        }
-
-        return resultSet;
-
-    }
-
     public static void main(String[] args) {
-
-        new DbConnection();
-
+        new DbConnection().getConnection();
     }
 
+    public int manipulate(String insertQuery) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+ 
 }
