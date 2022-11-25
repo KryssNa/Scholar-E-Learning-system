@@ -14,26 +14,26 @@ public class DbConnection {
 
     int value;
 
-    public static Connection connectdb() {
+    public static Connection getconnection() {
 
         try {
              
 
-            final String username = "root";
+            final String username = "sql6580066";
 
-            final String password = "Kryss@57977";
+            final String password = "FEERC1AdBC";
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
            Connection connection = DriverManager.getConnection(
 
-                    "jdbc:mysql://localhost:3306/scholarDB", username, password);
+                    "jdbc:mysql://sql6.freemysqlhosting.net:3306/sql6580066", username, password);
            
 
             if (connection != null) {
                 
 
-                System.out.println("Connected to database --> scholarDB");
+                System.out.println("Connected to database --> scholar E-Learning System Database");
                 return connection;
 
             } else {
@@ -98,7 +98,7 @@ public class DbConnection {
 
     public static void main(String[] args) {
 
-        new DbConnection().connectdb();
+        new DbConnection().getconnection();
 
     }
 

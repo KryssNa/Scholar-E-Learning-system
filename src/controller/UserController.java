@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class UserController {
     DbConnection db=new DbConnection();
     
-    Connection conn = db.connectdb();
+    Connection conn = db.getconnection();
     ResultSet rs;
 
     public int testUser(User newuser) {
@@ -19,7 +19,7 @@ public class UserController {
         User lv=new User(username,password);
         try {
                 
-                Connection conn=db.connectdb();
+                Connection conn=db.getconnection();
                 String query = "Select * from new_user where user_email='"+username+"' and user_pass='"+password+"' ";
                 
                 Statement smt = conn.createStatement();
