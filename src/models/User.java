@@ -1,6 +1,6 @@
 package models;
 
-public class Student{
+public class User{
     // creation of instance variable
     private int std_id;
     private String std_name;
@@ -55,7 +55,7 @@ public class Student{
 
 
     // creation of public constructor
-    public Student(int std_id, String std_name, int std_age, String std_address, int std_contacr){
+    public User(int std_id, String std_name, int std_age, String std_address, int std_contacr){
         this.std_id = std_id;
         this.std_name = std_name;
         this.std_age = std_age;

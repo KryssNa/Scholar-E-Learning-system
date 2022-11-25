@@ -1,12 +1,12 @@
 package controller;
 
 import database.DbConnection;
-import models.Student;
+import models.User;
 
 public class UserController {
     DbConnection dbConnection;
 
-    public int insertStudent(Student student) {
+    public int insertStudent(User student) {
         int id = student.getStd_id();
         String name = student.getStd_name();
         String address = student.getStd_address();
@@ -22,7 +22,7 @@ public class UserController {
         return result;
     }
 
-    public int updateStudent(Student student) {
+    public int updateStudent(User student) {
         int id = student.getStd_id();
         String name = student.getStd_name();
         String updateQuery = String.format(
