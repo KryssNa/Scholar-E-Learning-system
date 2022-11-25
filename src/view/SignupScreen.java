@@ -4,9 +4,8 @@
  */
 package view;
 import controller.SignuppController;
-import database.DbConnection;
 import javax.swing.*;
-import java.sql.*;
+
 import models.User;
 
 
@@ -15,18 +14,58 @@ import models.User;
  * @author HP
  */
 public class SignupScreen extends javax.swing.JFrame {
-    Connection conn;
-    ResultSet rs;
-    Statement smt;
-    DbConnection db=new DbConnection();
-
+//
     /**
      * Creates new form Login
      */
     public SignupScreen() {
         initComponents();
     }
+    
+    
+    public void insertuser(){
+    
+          // TODO add your handling code here:
+        String uname = tfusername.getText();
+        String email = tfemail.getText();
+        String pass = tfpass.getText();
+        String cpass = tfCpass.getText();
 
+        
+        
+        
+        // JOptionPane.showMessageDialog(null, appoint);
+        
+        if(uname.equals("")||email.equals("")||pass.equals("")||cpass.equals("")){
+          JOptionPane.showMessageDialog(null, "Please Fill all the details");
+          
+        
+    }  else if(!email.endsWith("@gmail.com")){
+        JOptionPane.showMessageDialog(rootPane, "Invalid E-mail!!");
+    
+    }
+        else if(!pass.equals(cpass)){
+              JOptionPane.showMessageDialog(rootPane, "Password must be same");
+          }
+    
+        
+        else{
+        // try {
+                  
+            User s1 = new User(uname,email,pass,cpass);
+            SignuppController sc= new SignuppController();
+            int isInserted = sc.insertuser(s1);
+            if(isInserted>0){
+                System.out.println("Inserted");
+                            JOptionPane.showMessageDialog(null,"User Registered Successfully");
+
+            }else{
+                System.out.println(" NOt Inserted");
+                           // JOptionPane.showMessageDialog(null,"Not Inserted ");
+            }           
+    }
+                                            
+    }         
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -182,48 +221,19 @@ public class SignupScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
+    private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) { 
         String uname = tfusername.getText();
         String email = tfemail.getText();
-        String pass = tfpass.getText();
-        String cpass = tfCpass.getText();
-
+        User s1 = new User(uname,email,null,null);
+        SignuppController sc= new SignuppController();
+        boolean isValid = sc.validateduplicatedata(s1);
         
+        if(isValid==false){
         
-        
-        // JOptionPane.showMessageDialog(null, appoint);
-        
-        if(uname.equals("")||email.equals("")||pass.equals("")||cpass.equals("")){
-          JOptionPane.showMessageDialog(null, "Please Fill all the details");
-          
-        
-    }    else if(!pass.equals(cpass)){
-              JOptionPane.showMessageDialog(rootPane, "Password must be same");
-          }
-    else if(!email.endsWith("@gmail.com")){
-        JOptionPane.showMessageDialog(rootPane, "Invalid E-mail!!");
-    
-    }
-        
-        else{
-        // try {
-        
-          
-            User s1 = new User(uname,email,pass,cpass);
-            SignuppController sc= new SignuppController();
-            int isInserted = sc.insertuser(s1);
-            if(isInserted>0){
-                System.out.println("Inserted");
-                            JOptionPane.showMessageDialog(null,"Inserted Successfully");
-
-            }else{
-                System.out.println(" NOt Inserted");
-                           // JOptionPane.showMessageDialog(null,"Not Inserted ");
-            }           
-    }
-                                            
-    }                                         
+        insertuser();
+    } else{
+            System.out.println("Some error occured");
+        } }                              
 
     private void tfusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfusernameActionPerformed
         // TODO add your handling code here:
