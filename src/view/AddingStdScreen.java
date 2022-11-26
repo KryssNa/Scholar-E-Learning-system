@@ -79,11 +79,10 @@ PreparedStatement pst=null;
    
  private void Update_table() {
     try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        conn=dbconn.getConnection();
-//        Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/studentdb","root","Kryss@57977");
+        
+        conn=dbconn.getconnection();
 
-        String sql ="select * from Student_Information";
+        String sql ="select * from AddStudent_user";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         student_table.setModel(DbUtils.resultSetToTableModel(rs));
@@ -205,6 +204,12 @@ PreparedStatement pst=null;
 
         jLabel3.setText("Date of Birth :");
 
+        txt_surname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_surnameActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Surname :");
 
         jLabel1.setText("First name :");
@@ -283,6 +288,12 @@ PreparedStatement pst=null;
         jLabel4.setText("Course Code :");
 
         jLabel5.setText("Student ID :");
+
+        txt_studentid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_studentidActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -620,7 +631,7 @@ PreparedStatement pst=null;
 
             try {
                
-                conn=dbconn.getConnection();
+                conn=dbconn.getconnection();
                 
                 st=conn.createStatement();
                 Long telephone=Long.parseLong(telephon);
@@ -629,7 +640,7 @@ PreparedStatement pst=null;
                 
                 
                
-               int result= st.executeUpdate("insert into Student_Information"+" values ('"+std_idd+"','"+fname+"','"+sname+"','"+dob+"','"+email+"','"+telephone+"','"+address+"'"
+               int result= st.executeUpdate("insert into AdminDash_AddStudent"+" values ('"+std_idd+"','"+fname+"','"+sname+"','"+dob+"','"+email+"','"+telephone+"','"+address+"'"
                         + ",'"+genderr+"','"+address1+"','"+pc+"','"+houseNo+"','"+cc+"')");
                 
                 if(result>0){
@@ -661,7 +672,7 @@ PreparedStatement pst=null;
             String val = txt_emp.getText().toString();
                 try{
 
-                String reg= "insert into Audit (emp_id, date, status) values ('"+val+"','"+value0+" / "+value1+"','Added Record')";
+                String reg= "insert into Admin_Audit (emp_id, date, status) values ('"+val+"','"+value0+" / "+value1+"','Added Record')";
                 pst=conn.prepareStatement(reg);
                 pst.execute();
 
@@ -727,7 +738,7 @@ PreparedStatement pst=null;
             String value1 = dateString;
             String val = txt_emp.getText().toString();
             try{
-                String reg= "insert into Audit (emp_id, date, status) values ('"+val+"','"+value0+" / "+value1+"','Deleted Record')";
+                String reg= "insert into Admin_Audit (emp_id, date, status) values ('"+val+"','"+value0+" / "+value1+"','Deleted Record')";
                 pst=conn.prepareStatement(reg);
                 pst.execute();
             }
@@ -736,7 +747,7 @@ PreparedStatement pst=null;
             {
                 JOptionPane.showMessageDialog(null,e);
             }
-            String sql ="delete from Student_Information where std_id=? ";
+            String sql ="delete from AdminDash_AddStudent where std_id=? ";
             try{
                 pst=conn.prepareStatement(sql);
                 pst.setString(1, txt_studentid.getText());
@@ -786,7 +797,7 @@ PreparedStatement pst=null;
                 String value11 = txt_pc.getText();
 
 
-                String sql= "update Student_Information set std_id='"+value4+"',firtstname='"+value1+"', surname='"+value2+"', "
+                String sql= "update AdminDash_AddStudent set std_id='"+value4+"',firtstname='"+value1+"', surname='"+value2+"', "
                         + "dob='"+value3+"',Email='"+value5+"',telephone='"+value6+"',Address='"+value7+"',Address2= '"+value9+"', "
                         + "Apartment='"+value10+"',Post_code ='"+value11+"'"
                         + "where std_id='"+value4+"' ";
@@ -811,7 +822,7 @@ PreparedStatement pst=null;
             String values = dateString;
             String val = txt_emp.getText().toString();
             try{
-                String reg= "insert into Audit (emp_id, date, status) values ('"+val+"','"+value0+" / "+values+"','Updated Record')";
+                String reg= "insert into Admin_Audit (emp_id, date, status) values ('"+val+"','"+value0+" / "+values+"','Updated Record')";
                 pst=conn.prepareStatement(reg);
                 pst.execute();
             }
@@ -856,7 +867,7 @@ Update_table();
             
             
 
-            String sql ="select * from Student_Information where std_id=? ";
+            String sql ="select * from AdminDash_AddStudent where std_id=? ";
 
             pst=conn.prepareStatement(sql);
             pst.setString(1,txt_search1.getText());
@@ -916,6 +927,14 @@ Update_table();
             }
         }
     }//GEN-LAST:event_txt_search1KeyReleased
+
+    private void txt_studentidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_studentidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_studentidActionPerformed
+
+    private void txt_surnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_surnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_surnameActionPerformed
 
     /**
      * @param args the command line arguments
