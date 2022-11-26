@@ -11,7 +11,7 @@ package view;
 public class virtualclass2 extends javax.swing.JFrame {
 
     /**
-     * Creates new form virtualclass2
+     * 
      */
     public virtualclass2() {
         initComponents();
