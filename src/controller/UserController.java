@@ -4,6 +4,7 @@ import database.DbConnection;
 import models.User;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import view.virtualclass2;
 
 
 public class UserController {
@@ -29,6 +30,7 @@ public class UserController {
 
                 JOptionPane.showMessageDialog(null, "Meeting joined successfully","Success",
                             JOptionPane.INFORMATION_MESSAGE);
+                new virtualclass2().setVisible(true);
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Incorrecct Username or password. Try again","Failed!!",

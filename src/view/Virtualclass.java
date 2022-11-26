@@ -185,7 +185,7 @@ public class Virtualclass extends javax.swing.JFrame {
             if(isLogin==0){
                 System.out.println("Joined");
                 //JOptionPane.showMessageDialog(null,"Meeting Joined Successfully");
-                new virtualclass2().setVisible(true);
+                
 
             }else{
                 System.out.println(" Error Joining meeting");
