@@ -4,7 +4,9 @@
  */
 package view;
 
+import controller.UserController;
 import javax.swing.JOptionPane;
+import models.User;
 
 /**
  *
@@ -181,7 +183,23 @@ public class Virtualclass extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_passwordActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new virtualclass2().setVisible(true);
+       // 
+       String email=txt_username.getText();
+       String pass=new String(txt_password.getPassword());
+       
+        User s1 = new User(email,pass);
+            UserController sc= new UserController();
+            int isLogin = sc.testUser(s1);
+            if(isLogin==0){
+                System.out.println("Joined");
+                //JOptionPane.showMessageDialog(null,"Meeting Joined Successfully");
+                new virtualclass2().setVisible(true);
+
+            }else{
+                System.out.println(" Error Joining meeting");
+                           // JOptionPane.showMessageDialog(null,"Not Inserted ");
+            }     
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
