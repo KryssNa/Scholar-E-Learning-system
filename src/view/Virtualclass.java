@@ -23,7 +23,7 @@ public class Virtualclass extends javax.swing.JFrame {
     
     public boolean validateLogin(){
         String name=txt_username.getText();
-        String pwd=txt_password.getText();
+        String pwd=new String(txt_password.getPassword());
         
         if (name.equals("")){
             JOptionPane.showMessageDialog(this,"please enter username");
@@ -39,17 +39,7 @@ public class Virtualclass extends javax.swing.JFrame {
     }
     
     //verify creds
-    public void login(){
-        String name=txt_username.getText();
-        String pwd=txt_password.getText();
-        
-        try{
-            
-        } catch (Exception e){
-            
-        }
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,6 +174,8 @@ public class Virtualclass extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        // 
+       
+       if(validateLogin()==true){
        String email=txt_username.getText();
        String pass=new String(txt_password.getPassword());
        
@@ -198,7 +190,7 @@ public class Virtualclass extends javax.swing.JFrame {
             }else{
                 System.out.println(" Error Joining meeting");
                            // JOptionPane.showMessageDialog(null,"Not Inserted ");
-            }     
+            }   }  
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
