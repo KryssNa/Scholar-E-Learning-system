@@ -3,7 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/kritimakhatri/Desktop/ELearning/src/view/virtualclass2.java</file>
+            <file>file:/Users/kritimakhatri/Desktop/ELearning/src/controller/UserController.java</file>
+            <file>file:/Users/kritimakhatri/Desktop/ELearning/src/database/DbConnection.java</file>
+            <file>file:/Users/kritimakhatri/Desktop/ELearning/src/models/User.java</file>
             <file>file:/Users/kritimakhatri/Desktop/ELearning/src/view/Virtualclass.java</file>
         </group>
     </open-files>
